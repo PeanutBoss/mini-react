@@ -17,10 +17,16 @@ const vDom = {
 
 
 // 硬编码
-const dom = document.createElement('div')
-dom.id = 'app'
+const dom = document.createElement(vDom.type)
+dom.id = vDom.props.id
 document.querySelector('#root').appendChild(dom)
 
-const textNode = document.createTextNode("")
-textNode.nodeValue = 'app'
+const textNode = createElement(textVNode.type)
+textNode.nodeValue = textVNode.props.nodeValue
 dom.appendChild(textNode)
+
+function createElement(type) {
+  return type === TEXT_NODE
+    ? document.createTextNode("")
+    : document.createElement(type)
+}
