@@ -1,10 +1,13 @@
+import ReactDom from './core/ReactDom.js'
+
 const TEXT_NODE = 'react_text_node'
 
 const textVNode = createNode(TEXT_NODE, { nodeValue: 'app' })
 // 构建虚拟dom
 const vDom = createNode('div', { id: 'app' }, textVNode)
 
-render(vDom, document.querySelector('#root'))
+// render(vDom, document.querySelector('#root'))
+ReactDom.createRoot(document.querySelector('#root')).render(vDom)
 
 function createElement(type) {
   return type === TEXT_NODE
