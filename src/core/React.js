@@ -1,6 +1,6 @@
 export const TEXT_NODE = 'react_text_node'
 
-export function createNode(type, props, ...children) {
+export function createElement(type, props, ...children) {
   return {
     type,
     props: {
@@ -20,7 +20,9 @@ function createTextNode(text) {
 }
 
 export function render({ type, props }, container) {
-  const el = createElement(type)
+  const el = type === TEXT_NODE
+    ? document.createTextNode("")
+    : document.createElement(type)
   for (const key in props) {
     if (key === 'children') continue
     el[key] = props[key]
@@ -29,10 +31,4 @@ export function render({ type, props }, container) {
   if (props.children.length) props.children.forEach(child => {
     render(child, el)
   })
-}
-
-function createElement(type) {
-  return type === TEXT_NODE
-    ? document.createTextNode("")
-    : document.createElement(type)
 }
